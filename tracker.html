@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <div class="tracker">
+            <h2>Calorie Tracker</h2>
+            <form class="form" id="mealTracker">
+                <div class="tracker-group">
+                    <h3>Breakfast</h3>
+                    <textarea id="breakfast" placeholder="Enter what you ate for breakfast"></textarea>
+                </div>
+                <div class="tracker-group">
+                    <h3>Lunch</h3>
+                    <textarea id="lunch" placeholder="Enter what you ate for lunch"></textarea>
+                </div>
+                <div class="tracker-group">
+                    <h3>Snacks</h3>
+                    <textarea id="snacks" placeholder="Enter what you ate for snacks"></textarea>
+                </div>
+                <div class="tracker-group">
+                    <h3>Dinner</h3>
+                    <textarea id="dinner" placeholder="Enter what you ate for dinner"></textarea>
+                </div>
+                <button type="submit" class="tracker-btn">Generate Report</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('mealTracker').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const meals = {
+                breakfast: document.getElementById('breakfast').value,
+                lunch: document.getElementById('lunch').value,
+                snacks: document.getElementById('snacks').value,
+                dinner: document.getElementById('dinner').value,
+            };
+            localStorage.setItem('meals', JSON.stringify(meals));
+            window.location.href = 'report.html';
+        });
+    </script>
+   
+</body>
+</html>

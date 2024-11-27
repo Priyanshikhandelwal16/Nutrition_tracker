@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition Report</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="card-container">
+        <div class="card">
+            <h1>Your Nutrition Report</h1>
+            <div id="report"></div>
+            <button onclick="goBack()">Track Another Day</button>
+        </div>
+        
+    </div>
+    <script>
+        function goBack() {
+            window.location.href = 'tracker.html';
+        }
+
+        function calculateCalories(meals) {
+            const calorieData = {
+                egg: 78,
+                toast: 80,
+                rice: 130,
+                chicken: 165,
+                salad: 30,
+                apple: 95,
+                biscuit: 50,
+                soup: 150,
+            };
+
+            let totalCalories = 0;
+            for (const meal in meals) {
+                const items = meals[meal].split(',').map(item => item.trim().toLowerCase());
+                items.forEach(item => {
+                    if (calorieData[item]) {
+                        totalCalories += calorieData[item];
+                    }
+                });
+            }
+            return totalCalories;
+        }
+
+        const meals = JSON.parse(localStorage.getItem('meals'));
+        const totalCalories = calculateCalories(meals);
+
+        document.getElementById('report').innerHTML = `
+            <p><strong>Calories Consumed:</strong> ${totalCalories} kcal</p>
+            <p><strong>Suggestions:</strong> Add more vegetables and protein to your diet.</p>
+            <p><strong>Prediction:</strong> Continuing this diet may lead to better energy levels.</p>
+        `;
+    </script>
+</body>
+</html>
